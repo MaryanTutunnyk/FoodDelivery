@@ -1,0 +1,90 @@
+﻿@{
+    bool isAdmin = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+    bool isManager = User.Identity.IsAuthenticated && User.IsInRole("OrderManager");
+    bool isUser = User.Identity.IsAuthenticated && User.IsInRole("User");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FoodDelivery</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/twitter-bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/twitter-bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">FoodDelivery</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li><a asp-controller="Menu" asp-action="Index" class="nav-link">Menu</a></li>
+                    @if (isAdmin || isManager)
+                    {
+                        <li><a asp-controller="Order" asp-action="Index" class="nav-link">Orders</a></li>
+                    }
+                    @if (!isAdmin && !isManager)
+                    {
+                        <li><a asp-controller="Cart" asp-action="Index" class="nav-link">Cart</a></li>
+                    }
+                    @if (isUser)
+                    {
+                        <li><a asp-controller="Purchase" asp-action="AllPurchases" class="nav-link">Purchases</a></li>
+                    }
+                    @if (isAdmin)
+                    {
+                        <li><a asp-controller="UserManage" asp-action="Index" class="nav-link">User Manager</a></li>
+
+                    }
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="py-2 bg-dark fixed-bottom">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; FoodDelivery 2019</p>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/jquery/jquery.js"></script>
+        <script src="~/lib/popper.js/umd/popper.min.js"></script>
+        <script src="~/twitter-bootstrap/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.0.min.js"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"
+                asp-fallback-src="~/lib/popper.js/umd/popper.min.js"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.3.1/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

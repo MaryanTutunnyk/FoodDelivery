@@ -1,0 +1,79 @@
+﻿@model FoodDelivery.DTO.Order.OrderDTO
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Order @Model.OrderId</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label" for="SentTime">Sent time:</label>
+                <input class="form-control" readonly type="datetime-local" data-val="true" id="SentTime" name="SentTime" value="@Model.SentTime.ToShortTimeString()">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="EstimatedTime">Estimated time:</label>
+                <input asp-for="EstimatedTime" class="form-control" />
+                <span asp-validation-for="EstimatedTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="OrderStatus">Order status:</label>
+                <select class="custom-select" asp-for="@Model.OrderStatus">
+                    <option value="" disabled>Please choose category</option>
+                    @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
+                    {
+                        <option value="@status">@status</option>
+                    }
+                </select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label lass="control-label">Address:</label>
+                <input class="form-control" value="@Model.Address.Region.ToString(), @Model.Address.Street.ToString(),  @Model.Address.BuildingNum" readonly />
+            </div>
+            <div class="form-group">
+                <label lass="control-label">Total cost:</label>
+                <input class="form-control" value="@Model.TotalPrice" readonly />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <span class="ml-3">|</span><a asp-action="Index" class="ml-2">Back to List</a>
+            </div>
+            <div class="form-group">
+                <input asp-for="OrderId" class="form-control" hidden />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        @foreach (var mi in Model.OrderItems)
+        {
+            <div class="card mt-2">
+                <h5 class="card-header">Item: "@mi.MenuItem.Name"</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="card-img-top" src="~/@mi.MenuItem.Image" />
+                        </div>
+                        <div class="col-md-9">
+                            <h5 class="card-title">Quantity:    @mi.Count</h5>
+                            <p class="card-text">
+                                Price per item: @mi.MenuItem.Price
+                                <br />
+                                Description: @mi.MenuItem.Description
+                                <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

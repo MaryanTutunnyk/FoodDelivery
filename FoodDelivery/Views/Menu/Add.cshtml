@@ -1,0 +1,62 @@
+﻿@model AddMenuModel
+
+@{
+    ViewData["Title"] = "AddMenuItem";
+}
+
+<h4>Add MenuItem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-controller="Menu" asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItemDTO.Name" class="control-label"></label>
+                <input asp-for="@Model.MenuItemDTO.Name" class="form-control" />
+                <span asp-validation-for="@Model.MenuItemDTO.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItemDTO.Price" class="control-label"></label>
+                <input asp-for="@Model.MenuItemDTO.Price" class="form-control" />
+                <span asp-validation-for="@Model.MenuItemDTO.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItemDTO.Description" class="control-label"></label>
+                <input asp-for="@Model.MenuItemDTO.Description" class="form-control" />
+                <span asp-validation-for="@Model.MenuItemDTO.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItemDTO.Category" class="control-label"></label>
+                <select class="custom-select" asp-for="@Model.MenuItemDTO.Category.Id">
+                    <option value="None" disabled>Please choose category</option>
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <option value="@cat.Id">@cat.CategoryName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItemDTO.Discount" class="control-label"></label>
+                <select class="custom-select" asp-for="@Model.MenuItemDTO.Discount.Id">
+                    <option value="None">Please choose discount</option>
+                    @foreach (var dis in Model.Discounts)
+                    {
+                        <option value="@dis.Id">@dis.Description</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItemDTO.Image" class="control-label"></label>
+                <input type="file" name="files" multiple />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+                <span class="ml-3">|</span><a asp-action="Index" class="ml-2">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

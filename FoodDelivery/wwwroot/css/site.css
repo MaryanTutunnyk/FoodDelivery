@@ -1,0 +1,245 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.float-reight {
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.float-left {
+    display: inline-block;
+}
+
+.count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px;
+    min-width: 35px;
+    text-align: center;
+}
+
+.plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+/*Prevent text selection*/
+span {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+nput::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input:disabled {
+    background-color: white;
+}
+
+.card-img-inline-cart {
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    margin-right: 50px;
+}
+
+.item-counter-cart {
+    padding-top: 20px;
+    display: inline-block;
+}
+
+.card-item {
+    margin-top: 15px;
+}
+
+.float-reight {
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.float-left {
+    display: inline-block;
+}
+
+.count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px;
+    min-width: 35px;
+    text-align: center;
+}
+
+.plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: black;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: black;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+.minus:hover {
+    background-color: #b9f9c4 !important;
+}
+
+.plus:hover {
+    background-color: #b9f9c4 !important;
+}
+
+.cartSubmitionInput {
+    width: 300px;
+}
+
+.item-cart-card {
+    margin-top: 20px;
+}
+
+.btn-group-vertical.special {
+    display: flex;
+}
+
+.special .btn {
+    flex: 1
+}
+
+.multi-item-carousel {
+    .carousel-inner
+
+{
+    > .item
+
+{
+    transition: 500ms ease-in-out left;
+}
+
+.active {
+    &.left
+
+{
+    left: -33%;
+}
+
+&.right {
+    left: 33%;
+}
+
+}
+
+.next {
+    left: 33%;
+}
+
+.prev {
+    left: -33%;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+    > .item {
+        // use your favourite prefixer here transition: 500ms ease-in-out left;
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none !important;
+    }
+}
+
+}
+
+.carouse-control {
+    &.left, &.right
+
+{
+    background-image: none;
+}
+
+}
+}

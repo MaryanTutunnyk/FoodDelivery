@@ -1,0 +1,58 @@
+﻿@model IEnumerable<OrderDTO>
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Orders</h2>
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="btn-group-vertical btn-block">
+                <a asp-controller="Order" asp-action="Index" asp-route-status=""
+                   class="btn btn-outline-dark">All orders</a>
+                @{
+                    foreach (var status in Enum.GetValues(typeof(OrderStatus)))
+                    {
+                        <a asp-controller="Order" asp-action="Index" asp-route-status="@status"
+                           class="btn btn-outline-dark">@status</a>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-9">
+            @foreach (var order in Model)
+            {
+                <div class="card mb-2">
+                    <h5 class="card-header">Order @order.OrderId</h5>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Information</h5>
+                        <p class="card-text">
+                            Sent time: @order.SentTime.ToShortTimeString()
+                            <br />
+                            Items count: @order.ItemsCount
+                            <br />
+                            Total price: @order.TotalPrice
+                            <br />
+                            Order status: @order.OrderStatus.ToString()
+                            <br />
+                        </p>
+                        
+                        @foreach(OrderStatus status in Enum.GetValues(typeof(OrderStatus)))
+                        {
+                            <a asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-id="@order.OrderId"
+                               asp-route-status="@status.ToString()" class="m-1 btn btn-outline-secondary @Html.Raw(order.OrderStatus == status ? "focus active" : "" )">
+                               @status.ToString()
+                               </a>
+                        }
+
+                        <a asp-controller="Order" asp-action="Edit" asp-route-id="@order.OrderId"
+                           class="btn btn-success">Handle order</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
